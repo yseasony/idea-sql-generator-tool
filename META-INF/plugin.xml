@@ -1,18 +1,17 @@
 <idea-plugin version="2">
-    <id>com.yourcompany.unique.plugin.id</id>
-    <name>Plugin display name here</name>
+    <id>org.yseasony.sqlgenerator</id>
+    <name>Sql Generator</name>
     <version>1.0</version>
-    <vendor email="support@yourcompany.com" url="http://www.yourcompany.com">YourCompany</vendor>
+    <vendor email="yseasony@gmail.com" url="https://github.com/yseasony">YourCompany</vendor>
 
-    <description><![CDATA[
-      Enter short description for your plugin here.<br>
-      <em>most HTML tags may be used</em>
-    ]]></description>
+    <description><![CDATA[idea Sql Generator plugin
+                <ul>
+                    <li>how to use, see github:https://github.com/yseasony/idea-sql-generator-tool</li>
+                </ul>
+                ]]>
+    </description>
 
-    <change-notes><![CDATA[
-      Add change notes here.<br>
-      <em>most HTML tags may be used</em>
-    ]]>
+    <change-notes>
     </change-notes>
 
     <!-- please see http://confluence.jetbrains.com/display/IDEADEV/Build+Number+Ranges for description -->

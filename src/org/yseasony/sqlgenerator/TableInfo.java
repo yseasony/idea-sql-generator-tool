@@ -36,6 +36,7 @@ public class TableInfo {
     }
 
     public List<DbColumnElement> getPrimaryKeys() {
+        System.out.println(tableElement.getPrimaryKey());
         List<? extends DbColumnElement> columns = getColumns();
         List<DbColumnElement> primaryKeys = Lists.newArrayList();
         for (DbColumnElement column : columns) {

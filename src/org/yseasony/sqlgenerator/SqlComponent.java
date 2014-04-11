@@ -23,6 +23,6 @@ public class SqlComponent implements ApplicationComponent {
     @NotNull
     @Override
     public String getComponentName() {
-        return "sql generator";
+        return "Sql Generator";
     }
 }

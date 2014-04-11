@@ -12,6 +12,7 @@ import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.persistence.database.TableType;
 import com.intellij.persistence.database.psi.DbTableElement;
 import com.intellij.persistence.database.view.DatabaseView;
+import org.yseasony.sqlgenerator.children.UpdateSqlGeneratorAction;
 
 /**
  * 类SqlGeneratorAction.java
@@ -55,7 +56,9 @@ public class SqlGeneratorAction extends ActionGroup {
                 new InsertSqlGeneratorAction(),
                 new InsertSqlGeneratorAction.NamedParameterSqlGeneratorAction(),
                 new DeleteSqlGeneratorAction(),
-                new DeleteSqlGeneratorAction.NamedParameterSqlGeneratorAction() };
+                new DeleteSqlGeneratorAction.NamedParameterSqlGeneratorAction(),
+                new UpdateSqlGeneratorAction(),
+                new UpdateSqlGeneratorAction.NamedParameterSqlGeneratorAction() };
     }
 
 }
