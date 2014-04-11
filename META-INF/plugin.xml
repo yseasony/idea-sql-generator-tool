@@ -12,6 +12,11 @@
     </description>
 
     <change-notes>
+                <![CDATA[idea Sql Generator plugin
+                <ul>
+                    <li>Sql Generator v1.0</li>
+                </ul>
+                ]]>
     </change-notes>
 
     <!-- please see http://confluence.jetbrains.com/display/IDEADEV/Build+Number+Ranges for description -->
