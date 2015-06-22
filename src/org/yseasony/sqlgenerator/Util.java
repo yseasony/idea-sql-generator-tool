@@ -3,7 +3,7 @@ package org.yseasony.sqlgenerator;
 import java.util.List;
 import java.util.Locale;
 
-import com.intellij.persistence.database.psi.DbColumnElement;
+import com.intellij.database.psi.DbColumnElement;
 
 public final class Util {
 

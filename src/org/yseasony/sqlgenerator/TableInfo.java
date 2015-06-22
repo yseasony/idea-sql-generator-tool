@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.common.collect.Lists;
-import com.intellij.persistence.database.psi.DbColumnElement;
-import com.intellij.persistence.database.psi.DbTableElement;
+import com.intellij.database.psi.DbColumnElement;
+import com.intellij.database.psi.DbTableElement;
 
 public class TableInfo {
 

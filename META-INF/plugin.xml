@@ -43,7 +43,8 @@
     </project-components>
 
     <depends>com.intellij.modules.ultimate</depends>
-    <depends>com.intellij.persistence.database</depends>
+    <depends optional="true">com.intellij.database</depends>
+    <depends optional="true">com.intellij.persistence.database</depends>
 
     <actions>
         <action id="sqlGenerate" class="org.yseasony.sqlgenerator.SqlGeneratorAction">

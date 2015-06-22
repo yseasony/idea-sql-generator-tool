@@ -7,7 +7,7 @@ import org.yseasony.sqlgenerator.SqlGenerator;
 import org.yseasony.sqlgenerator.TableInfo;
 import org.yseasony.sqlgenerator.Util;
 
-import com.intellij.persistence.database.psi.DbColumnElement;
+import com.intellij.database.psi.DbColumnElement;
 
 public class InsertSqlGeneratorAction extends BaseSqlGenerator {
 

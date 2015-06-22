@@ -9,9 +9,9 @@ import org.yseasony.sqlgenerator.children.SelectSqlGeneratorAction;
 import com.intellij.openapi.actionSystem.ActionGroup;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.persistence.database.TableType;
-import com.intellij.persistence.database.psi.DbTableElement;
-import com.intellij.persistence.database.view.DatabaseView;
+import com.intellij.database.model.TableType;
+import com.intellij.database.psi.DbTableElement;
+import com.intellij.database.view.DatabaseView;
 import org.yseasony.sqlgenerator.children.UpdateSqlGeneratorAction;
 
 /**
