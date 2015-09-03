@@ -1,22 +1,33 @@
 <idea-plugin version="2">
     <id>org.yseasony.sqlgenerator</id>
     <name>Sql Generator</name>
-    <version>1.0</version>
-    <vendor email="yseasony@gmail.com" url="https://github.com/yseasony">YourCompany</vendor>
+    <version>1.1</version>
+    <vendor email="yseasony@gmail.com" url="https://github.com/yseasony">yseasony</vendor>
 
-    <description><![CDATA[idea Sql Generator plugin
-                <ul>
-                    <li>how to use, see github:https://github.com/yseasony/idea-sql-generator-tool</li>
-                </ul>
-                ]]>
+    <description>
+        <![CDATA[
+            <h1>idea Sql Generator plugin</h1><br/>
+            <ul>
+                <li>Easy Sql Generator</li>
+                <li>How to use, github: <a href="https://github.com/yseasony/idea-sql-generator-tool">https://github.com/yseasony/idea-sql-generator-tool</a></li>
+            </ul>
+            <br/>
+        ]]>
     </description>
 
     <change-notes>
-                <![CDATA[idea Sql Generator plugin
-                <ul>
-                    <li>Sql Generator v1.0</li>
-                </ul>
-                ]]>
+        <![CDATA[
+            <h1>idea Sql Generator plugin</h1><br/>
+            <ul>
+                <li>
+                    Sql Generator v1.1 <br/>
+                    Support PhpStorm,PyCharm.<br/>
+                    Thank for juntalis fix issue.
+                </li>
+                <li>Sql Generator v1.0<br/>
+                </li>
+            </ul>
+        ]]>
     </change-notes>
 
     <!-- please see http://confluence.jetbrains.com/display/IDEADEV/Build+Number+Ranges for description -->
