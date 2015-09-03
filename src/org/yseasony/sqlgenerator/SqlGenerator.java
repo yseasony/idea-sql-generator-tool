@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
 
-import com.intellij.persistence.database.psi.DbColumnElement;
+import com.intellij.database.psi.DbColumnElement;
 
 public class SqlGenerator {
 
