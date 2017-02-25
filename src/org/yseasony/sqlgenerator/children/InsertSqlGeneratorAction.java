@@ -1,13 +1,13 @@
 package org.yseasony.sqlgenerator.children;
 
-import java.util.List;
-
+import com.intellij.database.model.DasColumn;
 import org.jetbrains.annotations.Nullable;
 import org.yseasony.sqlgenerator.SqlGenerator;
 import org.yseasony.sqlgenerator.TableInfo;
 import org.yseasony.sqlgenerator.Util;
 
-import com.intellij.database.psi.DbColumnElement;
+import java.util.List;
+
 
 public class InsertSqlGeneratorAction extends BaseSqlGenerator {
 
@@ -41,9 +41,9 @@ public class InsertSqlGeneratorAction extends BaseSqlGenerator {
                 @Override
                 public String getInsertValues() {
                     StringBuilder values = new StringBuilder();
-                    List<? extends DbColumnElement> columns = tableInfo.getColumns();
+                    List<DasColumn> columns = tableInfo.getColumns();
                     for (int i = 0; i < columns.size(); i++) {
-                        DbColumnElement columnElement = columns.get(i);
+                        DasColumn columnElement = columns.get(i);
                         if (i != 0) {
                             values.append(",");
                         }

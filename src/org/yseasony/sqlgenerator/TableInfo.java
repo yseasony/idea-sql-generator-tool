@@ -1,61 +1,75 @@
 package org.yseasony.sqlgenerator;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.google.common.collect.Lists;
-import com.intellij.database.psi.DbColumnElement;
-import com.intellij.database.psi.DbTableElement;
+import com.intellij.database.model.DasColumn;
+import com.intellij.database.psi.DbTable;
+import com.intellij.database.util.DasUtil;
+import com.intellij.util.containers.JBIterable;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class TableInfo {
 
-    private final DbTableElement  tableElement;
+    private final DbTable tableElement;
 
-    private List<DbColumnElement> columns;
+    private List<DasColumn> columns = new ArrayList<DasColumn>();
 
-    public TableInfo(DbTableElement tableElement) {
+    private List<String> primaryKeys = new ArrayList<String>();
+
+    public TableInfo(DbTable tableElement) {
         this.tableElement = tableElement;
+        List<DasColumn> columns = new ArrayList<DasColumn>();
+
+        JBIterable<? extends DasColumn> columnsIter = DasUtil.getColumns(tableElement);
+        List<? extends DasColumn> dasColumns = columnsIter.toList();
+        for (DasColumn dasColumn : dasColumns) {
+            columns.add(dasColumn);
+
+            if (DasUtil.isPrimary(dasColumn)) {
+                primaryKeys.add(dasColumn.getName());
+            }
+
+        }
+
+        this.columns = columns;
     }
 
     public String getTableName() {
         return tableElement.getName();
     }
 
-    public List<? extends DbColumnElement> getColumns() {
-        return tableElement.getColumns();
+    public List<DasColumn> getColumns() {
+        return columns;
     }
 
     public List<String> getColumnsName() {
         List<String> columnsName = Lists.newArrayList();
-        List<? extends DbColumnElement> columns = tableElement.getColumns();
-        for (DbColumnElement column : columns) {
+        for (DasColumn column : columns) {
             columnsName.add(column.getName());
         }
-
         return columnsName;
     }
 
-    public List<DbColumnElement> getPrimaryKeys() {
-        System.out.println(tableElement.getPrimaryKey());
-        List<? extends DbColumnElement> columns = getColumns();
-        List<DbColumnElement> primaryKeys = Lists.newArrayList();
-        for (DbColumnElement column : columns) {
-            if (column.isPrimary()) {
-                primaryKeys.add(column);
-            }
-        }
-        return primaryKeys;
+    public List<String> getPrimaryKeys() {
+        return this.primaryKeys;
     }
 
-    public List<DbColumnElement> getNonPrimaryColumns() {
-        List<? extends DbColumnElement> columns = getColumns();
-        List<DbColumnElement> primaryKeys = getPrimaryKeys();
-        List<DbColumnElement> ret = new ArrayList<DbColumnElement>();
-        for (DbColumnElement column : columns) {
-            if (!primaryKeys.contains(column)) {
+    public List<DasColumn> getNonPrimaryColumns() {
+        Set<String> pKNameSet = new HashSet<String>();
+        for (String pkName : getPrimaryKeys()) {
+            pKNameSet.add(pkName);
+        }
+
+        List<DasColumn> ret = new ArrayList<DasColumn>();
+        for (DasColumn column : columns) {
+            if (!pKNameSet.contains(column.getName())) {
                 ret.add(column);
             }
         }
+
         return ret;
     }
 }

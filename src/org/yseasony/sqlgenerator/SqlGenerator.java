@@ -1,10 +1,9 @@
 package org.yseasony.sqlgenerator;
 
-import java.util.List;
-
+import com.intellij.database.model.DasColumn;
 import org.apache.commons.lang.StringUtils;
 
-import com.intellij.database.psi.DbColumnElement;
+import java.util.List;
 
 public class SqlGenerator {
 
@@ -23,7 +22,7 @@ public class SqlGenerator {
     }
 
     public String getInsertValues() {
-        List<? extends DbColumnElement> columns = tableInfo.getColumns();
+        List<DasColumn> columns = tableInfo.getColumns();
         StringBuilder columnList = new StringBuilder();
         for (int i = 0, size = columns.size(); i < size; i++) {
             if (i != 0) {
@@ -35,10 +34,10 @@ public class SqlGenerator {
     }
 
     public String getSetClause() {
-        List<? extends DbColumnElement> columns = tableInfo.getNonPrimaryColumns();
+        List<DasColumn> columns = tableInfo.getNonPrimaryColumns();
         StringBuilder setClause = new StringBuilder();
         for (int i = 0, size = columns.size(); i < size; i++) {
-            DbColumnElement columnElement = columns.get(i);
+            DasColumn columnElement = columns.get(i);
             if (i != 0) {
                 setClause.append(",");
             }

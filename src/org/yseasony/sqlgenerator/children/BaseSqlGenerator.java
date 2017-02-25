@@ -1,21 +1,19 @@
 package org.yseasony.sqlgenerator.children;
 
-import java.awt.datatransfer.StringSelection;
-
+import com.intellij.database.psi.DbTable;
+import com.intellij.database.view.DatabaseView;
+import com.intellij.openapi.actionSystem.AnAction;
+import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.ide.CopyPasteManager;
 import org.yseasony.sqlgenerator.SqlGenerator;
 import org.yseasony.sqlgenerator.TableInfo;
 import org.yseasony.sqlgenerator.Util;
 
-import com.intellij.openapi.actionSystem.AnAction;
-import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.ide.CopyPasteManager;
-import com.intellij.database.model.TableType;
-import com.intellij.database.psi.DbTableElement;
-import com.intellij.database.view.DatabaseView;
+import java.awt.datatransfer.StringSelection;
 
 /**
  * 类BaseSqlGenerator.java
- * 
+ *
  * @author Damon 2014-04-04 下午1:57
  */
 public abstract class BaseSqlGenerator extends AnAction {
@@ -28,6 +26,9 @@ public abstract class BaseSqlGenerator extends AnAction {
 
     @Override
     public void actionPerformed(AnActionEvent event) {
+
+        event.getDataContext().getData("DATABASE_VIEW_KEY");
+
         DatabaseView view = DatabaseView.DATABASE_VIEW_KEY.getData(event.getDataContext());
         if (view == null) {
             return;
@@ -37,13 +38,11 @@ public abstract class BaseSqlGenerator extends AnAction {
 
         StringBuilder sql = new StringBuilder();
         for (Object table : tables) {
-            if (!(table instanceof DbTableElement)
-                    || (((DbTableElement) table).getTableType() != TableType.TABLE && ((DbTableElement) table)
-                            .getTableType() != TableType.VIEW)) {
+            if (!(table instanceof DbTable)) {
                 continue;
             }
 
-            TableInfo tableInfo = new TableInfo((DbTableElement) table);
+            TableInfo tableInfo = new TableInfo((DbTable) table);
             String sqlTemplate = getSqlTemplate();
             // table name
             sqlTemplate = sqlTemplate.replaceAll("\\$TABLE_NAME\\$", tableInfo.getTableName());
@@ -65,6 +64,7 @@ public abstract class BaseSqlGenerator extends AnAction {
             sql.append(sqlTemplate);
             sql.append(Util.LF);
         }
+
         CopyPasteManager.getInstance().setContents(new StringSelection(sql.toString()));
     }
 

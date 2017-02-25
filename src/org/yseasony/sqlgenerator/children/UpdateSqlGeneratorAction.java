@@ -1,13 +1,13 @@
 package org.yseasony.sqlgenerator.children;
 
-import java.util.List;
 
+import com.intellij.database.model.DasColumn;
 import org.jetbrains.annotations.Nullable;
 import org.yseasony.sqlgenerator.SqlGenerator;
 import org.yseasony.sqlgenerator.TableInfo;
 import org.yseasony.sqlgenerator.Util;
 
-import com.intellij.database.psi.DbColumnElement;
+import java.util.List;
 
 public class UpdateSqlGeneratorAction extends BaseSqlGenerator {
 
@@ -40,11 +40,11 @@ public class UpdateSqlGeneratorAction extends BaseSqlGenerator {
             return new SqlGenerator(tableInfo) {
                 @Override
                 public String getSetClause() {
-                    List<? extends DbColumnElement> columns = tableInfo.getNonPrimaryColumns();
+                    List<DasColumn> columns = tableInfo.getNonPrimaryColumns();
 
                     StringBuilder sb = new StringBuilder();
                     for (int i = 0; i < columns.size(); i++) {
-                        DbColumnElement element = columns.get(i);
+                        DasColumn element = columns.get(i);
                         if (i != 0) {
                             sb.append(',');
                         }
