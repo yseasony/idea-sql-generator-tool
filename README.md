@@ -4,6 +4,12 @@ IntelliJ IDEA sql generator plugin [![Donate](https://www.paypal.com/en_US/i/btn
 ### Screenshot
 <img src="https://raw.githubusercontent.com/yseasony/idea-sql-generator-tool/master/doc/1.png" width="735" height="490" />
 
+### How to use
+- Connecting to Your Database:
+  - <kbd>View</kbd> > <kbd>Tool Windows</kbd> > <kbd>Database</kbd>
+- Sql Generator
+  - <kbd>Select Table</kbd> > <kbd>Right click popup menu</kbd> > <kbd>Select Sql Generator</kbd>
+
 Installation
 ------------
 ### Plugin Installation
