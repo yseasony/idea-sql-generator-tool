@@ -1,7 +1,7 @@
 <idea-plugin version="2">
     <id>org.yseasony.sqlgenerator</id>
     <name>Sql Generator</name>
-    <version>2.0</version>
+    <version>2.0.1</version>
     <vendor email="yseasony@gmail.com" url="https://github.com/yseasony">yseasony</vendor>
 
     <description>
@@ -19,6 +19,10 @@
         <![CDATA[
             <h1>idea Sql Generator plugin</h1><br/>
             <ul>
+                <li>
+                    Sql Generator v2.0.1<br/>
+                    fix "com.intellij.database" not installed, support DataGrip
+                </li>
                 <li>
                     Sql Generator v2.0<br/>
                     Support after idea 15.
@@ -61,12 +65,11 @@
         <!-- Add your project components here -->
     </project-components>
 
-    <depends>com.intellij.database</depends>
+    <depends optional="true">com.intellij.database</depends>
     <depends optional="true">com.intellij.modules.ultimate</depends>
 
     <actions>
         <action id="sqlGenerate" class="org.yseasony.sqlgenerator.SqlGeneratorAction">
-            <!--<add-to-group group-id="WindowMenu" anchor="first"/>-->
             <add-to-group group-id="DatabaseViewPopupMenu" anchor="last"/>
         </action>
     </actions>
