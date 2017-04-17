@@ -1,7 +1,7 @@
 <idea-plugin version="2">
     <id>org.yseasony.sqlgenerator</id>
     <name>Sql Generator</name>
-    <version>2.0.1</version>
+    <version>2.1.1</version>
     <vendor email="yseasony@gmail.com" url="https://github.com/yseasony">yseasony</vendor>
 
     <description>
@@ -10,6 +10,8 @@
             <ul>
                 <li>Easy Sql Generator</li>
                 <li>How to use, github: <a href="https://github.com/yseasony/idea-sql-generator-tool">https://github.com/yseasony/idea-sql-generator-tool</a></li>
+                <li>issues: <a href="https://github.com/yseasony/idea-sql-generator-tool/issues">issues</a></li>
+                <li>donate: <a href="https://www.paypal.me/yseasony">paypal</a></li>
             </ul>
             <br/>
         ]]>
@@ -19,6 +21,10 @@
         <![CDATA[
             <h1>idea Sql Generator plugin</h1><br/>
             <ul>
+                <li>
+                    Sql Generator v2.1.1<br/>
+                    DataGrip version number
+                </li>
                 <li>
                     Sql Generator v2.0.1<br/>
                     fix "com.intellij.database" not installed, support DataGrip
