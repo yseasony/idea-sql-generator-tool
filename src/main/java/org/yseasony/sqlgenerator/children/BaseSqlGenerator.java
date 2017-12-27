@@ -1,10 +1,11 @@
 package org.yseasony.sqlgenerator.children;
 
 import com.intellij.database.psi.DbTable;
-import com.intellij.database.view.DatabaseView;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
+import com.intellij.openapi.actionSystem.LangDataKeys;
 import com.intellij.openapi.ide.CopyPasteManager;
+import com.intellij.psi.PsiElement;
 import org.yseasony.sqlgenerator.SqlGenerator;
 import org.yseasony.sqlgenerator.TableInfo;
 import org.yseasony.sqlgenerator.Util;
@@ -26,23 +27,18 @@ public abstract class BaseSqlGenerator extends AnAction {
 
     @Override
     public void actionPerformed(AnActionEvent event) {
-
-        event.getDataContext().getData("DATABASE_VIEW_KEY");
-
-        DatabaseView view = DatabaseView.DATABASE_VIEW_KEY.getData(event.getDataContext());
-        if (view == null) {
+        PsiElement[] psiElements = event.getData(LangDataKeys.PSI_ELEMENT_ARRAY);
+        if (psiElements == null || psiElements.length == 0) {
             return;
         }
 
-        Object[] tables = view.getTreeBuilder().getSelectedElements().toArray();
-
         StringBuilder sql = new StringBuilder();
-        for (Object table : tables) {
-            if (!(table instanceof DbTable)) {
+        for (PsiElement psiElement : psiElements) {
+            if (!(psiElement instanceof DbTable)) {
                 continue;
             }
 
-            TableInfo tableInfo = new TableInfo((DbTable) table);
+            TableInfo tableInfo = new TableInfo((DbTable) psiElement);
             String sqlTemplate = getSqlTemplate();
             // table name
             sqlTemplate = sqlTemplate.replaceAll("\\$TABLE_NAME\\$", tableInfo.getTableName());
@@ -62,7 +58,14 @@ public abstract class BaseSqlGenerator extends AnAction {
             sqlTemplate = sqlTemplate.replaceAll("\\$SET_CLAUSE\\$", generator.getSetClause());
 
             sql.append(sqlTemplate);
+
+            if (psiElements.length > 1) {
+                sql.append(";");
+            }
+
             sql.append(Util.LF);
+
+
         }
 
         CopyPasteManager.getInstance().setContents(new StringSelection(sql.toString()));
