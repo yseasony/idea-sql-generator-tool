@@ -1,0 +1,44 @@
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+        maven {
+            url 'http://dl.bintray.com/jetbrains/intellij-plugin-service'
+        }
+
+    }
+    dependencies {
+        classpath "gradle.plugin.org.jetbrains.intellij.plugins:gradle-intellij-plugin:0.2.17"
+    }
+}
+
+plugins {
+    id "org.jetbrains.intellij" version "0.2.17"
+}
+
+group 'org.yseasony'
+version '2.1.1-SNAPSHOT'
+
+apply plugin: 'idea'
+apply plugin: 'org.jetbrains.intellij'
+apply plugin: 'java'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    compileOnly fileTree(include: ['*.jar'], dir: ideaSDKlocalPath + '/Contents/plugins/DatabaseTools/lib')
+}
+
+
+
+intellij {
+    localPath ideaSDKlocalPath //调试我们插件的版本
+    pluginName 'Sql Generator'
+    sandboxDirectory = project.rootDir.canonicalPath + "/.sandbox" //插件生成的临时文件的地址
+}
