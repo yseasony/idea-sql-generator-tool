@@ -42,3 +42,8 @@ intellij {
     pluginName 'Sql Generator'
     sandboxDirectory = project.rootDir.canonicalPath + "/.sandbox" //插件生成的临时文件的地址
 }
+
+patchPluginXml {
+    sinceBuild 143
+    untilBuild ''
+}
