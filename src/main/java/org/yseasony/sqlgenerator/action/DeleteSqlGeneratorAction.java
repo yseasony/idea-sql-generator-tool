@@ -1,11 +1,11 @@
-package org.yseasony.sqlgenerator.children;
+package org.yseasony.sqlgenerator.action;
 
 import org.jetbrains.annotations.Nullable;
-import org.yseasony.sqlgenerator.SqlGenerator;
-import org.yseasony.sqlgenerator.TableInfo;
-import org.yseasony.sqlgenerator.Util;
+import org.yseasony.sqlgenerator.utils.SqlGenerator;
+import org.yseasony.sqlgenerator.utils.TableInfo;
+import org.yseasony.sqlgenerator.utils.Util;
 
-public class DeleteSqlGeneratorAction extends BaseSqlGenerator {
+public class DeleteSqlGeneratorAction extends BaseSqlGeneratorAction {
 
     public DeleteSqlGeneratorAction() {
         super("delete sql generator");

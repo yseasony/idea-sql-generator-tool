@@ -1,4 +1,4 @@
-package org.yseasony.sqlgenerator;
+package org.yseasony.sqlgenerator.component;
 
 import com.intellij.openapi.components.ApplicationComponent;
 import org.jetbrains.annotations.NotNull;

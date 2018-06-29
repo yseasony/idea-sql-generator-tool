@@ -1,4 +1,4 @@
-package org.yseasony.sqlgenerator;
+package org.yseasony.sqlgenerator.utils;
 
 import java.util.List;
 import java.util.Locale;
@@ -9,9 +9,6 @@ public final class Util {
      * 改行
      */
     public static final String LF = System.getProperty("line.separator");
-
-    private Util() {
-    }
 
     public static String makeWhereClause(List<String> columns) {
         if (columns == null || columns.isEmpty()) {

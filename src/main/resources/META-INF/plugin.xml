@@ -63,7 +63,7 @@
 
   <application-components>
     <component>
-      <implementation-class>org.yseasony.sqlgenerator.SqlComponent</implementation-class>
+      <implementation-class>org.yseasony.sqlgenerator.component.SqlComponent</implementation-class>
     </component>
   </application-components>
 
@@ -74,8 +74,12 @@
   <depends optional="true">com.intellij.database</depends>
   <depends optional="true">com.intellij.modules.ultimate</depends>
 
+  <extensions defaultExtensionNs="com.intellij">
+    <projectConfigurable groupId="tools" displayName="Sql Generator" id="sqlGeneratorConfig" instance="org.yseasony.sqlgenerator.configurable.SqlGeneratorConfig" />
+  </extensions>
+
   <actions>
-    <action id="sqlGenerate" class="org.yseasony.sqlgenerator.SqlGeneratorAction">
+    <action id="sqlGenerate" class="org.yseasony.sqlgenerator.action.SqlGeneratorAction">
       <add-to-group group-id="DatabaseViewPopupMenu" anchor="last"/>
     </action>
   </actions>

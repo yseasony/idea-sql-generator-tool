@@ -1,16 +1,16 @@
-package org.yseasony.sqlgenerator.children;
+package org.yseasony.sqlgenerator.action;
 
 import org.jetbrains.annotations.Nullable;
-import org.yseasony.sqlgenerator.SqlGenerator;
-import org.yseasony.sqlgenerator.TableInfo;
-import org.yseasony.sqlgenerator.Util;
+import org.yseasony.sqlgenerator.utils.SqlGenerator;
+import org.yseasony.sqlgenerator.utils.TableInfo;
+import org.yseasony.sqlgenerator.utils.Util;
 
 /**
  * 类SelectSqlGeneratorAction.java
  * 
  * @author Damon 2014-03-26 下午4:41
  */
-public class SelectSqlGeneratorAction extends BaseSqlGenerator {
+public class SelectSqlGeneratorAction extends BaseSqlGeneratorAction {
 
     public SelectSqlGeneratorAction() {
         super("select sql generator");
