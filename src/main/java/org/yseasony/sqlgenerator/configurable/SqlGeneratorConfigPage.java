@@ -1,8 +1,8 @@
 package org.yseasony.sqlgenerator.configurable;
 
 import com.intellij.openapi.options.Configurable;
-import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.options.SearchableConfigurable;
+import com.intellij.openapi.project.Project;
 import org.jetbrains.annotations.Nls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -12,38 +12,51 @@ import javax.swing.*;
 /**
  * Created by yelei.yl on 2018/1/22.
  */
-public class SqlGeneratorConfig implements SearchableConfigurable, Configurable.NoScroll {
+public class SqlGeneratorConfigPage implements SearchableConfigurable, Configurable.NoScroll {
 
     private SqlGeneratorConfigGUI configGUI;
+    private Project mProject;
+    private SqlGeneratorConfigComponent.SqlGeneratorConfig sqlGeneratorConfig;
 
+
+    public SqlGeneratorConfigPage(Project project) {
+        mProject = project;
+        sqlGeneratorConfig = SqlGeneratorConfigComponent.getInstance(project);
+    }
 
     @NotNull
     @Override
     public String getId() {
-        return "sqlGeneratorConfig";
+        return getDisplayName();
     }
 
     @Nls
     @Override
     public String getDisplayName() {
-        return "Sql Generator";
+        return "SqlGenerator";
+    }
+
+    @Override
+    public String getHelpTopic() {
+        return null;
     }
 
     @Nullable
     @Override
     public JComponent createComponent() {
         configGUI = new SqlGeneratorConfigGUI();
+        configGUI.createUI(mProject);
         return configGUI.getRootPanel();
     }
 
     @Override
     public boolean isModified() {
-        return false;
+        return true;
     }
 
     @Override
-    public void apply() throws ConfigurationException {
-
+    public void apply() {
+        configGUI.apply();
     }
 
     private void createUIComponents() {
