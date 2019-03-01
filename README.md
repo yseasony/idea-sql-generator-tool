@@ -24,7 +24,7 @@ Installation
   
 Restart IDE.
   
-### Download
+Download
 -------
 Download the [latest release](https://github.com/yseasony/idea-sql-generator-tool/releases).
 
