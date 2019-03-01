@@ -1,15 +1,15 @@
-package org.yseasony.sqlgenerator.children;
+package org.yseasony.sqlgenerator.action;
 
 import com.intellij.database.model.DasColumn;
 import org.jetbrains.annotations.Nullable;
-import org.yseasony.sqlgenerator.SqlGenerator;
-import org.yseasony.sqlgenerator.TableInfo;
-import org.yseasony.sqlgenerator.Util;
+import org.yseasony.sqlgenerator.utils.SqlGenerator;
+import org.yseasony.sqlgenerator.utils.TableInfo;
+import org.yseasony.sqlgenerator.utils.Util;
 
 import java.util.List;
 
 
-public class InsertSqlGeneratorAction extends BaseSqlGenerator {
+public class InsertSqlGeneratorAction extends BaseSqlGeneratorAction {
 
     public InsertSqlGeneratorAction() {
         super("insert sql generator");

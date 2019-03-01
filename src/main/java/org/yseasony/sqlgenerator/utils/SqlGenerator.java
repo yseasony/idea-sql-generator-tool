@@ -1,4 +1,4 @@
-package org.yseasony.sqlgenerator;
+package org.yseasony.sqlgenerator.utils;
 
 import com.intellij.database.model.DasColumn;
 import org.apache.commons.lang.StringUtils;

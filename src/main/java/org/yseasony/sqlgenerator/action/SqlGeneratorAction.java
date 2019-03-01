@@ -1,4 +1,4 @@
-package org.yseasony.sqlgenerator;
+package org.yseasony.sqlgenerator.action;
 
 import com.intellij.database.psi.DbTable;
 import com.intellij.openapi.actionSystem.ActionGroup;
@@ -8,10 +8,10 @@ import com.intellij.openapi.actionSystem.LangDataKeys;
 import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.yseasony.sqlgenerator.children.DeleteSqlGeneratorAction;
-import org.yseasony.sqlgenerator.children.InsertSqlGeneratorAction;
-import org.yseasony.sqlgenerator.children.SelectSqlGeneratorAction;
-import org.yseasony.sqlgenerator.children.UpdateSqlGeneratorAction;
+import org.yseasony.sqlgenerator.action.DeleteSqlGeneratorAction;
+import org.yseasony.sqlgenerator.action.InsertSqlGeneratorAction;
+import org.yseasony.sqlgenerator.action.SelectSqlGeneratorAction;
+import org.yseasony.sqlgenerator.action.UpdateSqlGeneratorAction;
 
 /**
  * 类SqlGeneratorAction.java

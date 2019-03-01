@@ -1,4 +1,4 @@
-package org.yseasony.sqlgenerator.children;
+package org.yseasony.sqlgenerator.action;
 
 import com.intellij.database.psi.DbTable;
 import com.intellij.openapi.actionSystem.AnAction;
@@ -6,9 +6,8 @@ import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.intellij.openapi.actionSystem.LangDataKeys;
 import com.intellij.openapi.ide.CopyPasteManager;
 import com.intellij.psi.PsiElement;
-import org.yseasony.sqlgenerator.SqlGenerator;
-import org.yseasony.sqlgenerator.TableInfo;
-import org.yseasony.sqlgenerator.Util;
+import org.yseasony.sqlgenerator.configurable.SqlGeneratorConfigComponent;
+import org.yseasony.sqlgenerator.utils.*;
 
 import java.awt.datatransfer.StringSelection;
 
@@ -17,9 +16,11 @@ import java.awt.datatransfer.StringSelection;
  *
  * @author Damon 2014-04-04 下午1:57
  */
-public abstract class BaseSqlGenerator extends AnAction {
+public abstract class BaseSqlGeneratorAction extends AnAction {
 
-    public BaseSqlGenerator(String text) {
+    private Formatter formatter = new BasicFormatterImpl();
+
+    public BaseSqlGeneratorAction(String text) {
         super(text);
     }
 
@@ -32,7 +33,7 @@ public abstract class BaseSqlGenerator extends AnAction {
             return;
         }
 
-        StringBuilder sql = new StringBuilder();
+        StringBuilder sbSql = new StringBuilder();
         for (PsiElement psiElement : psiElements) {
             if (!(psiElement instanceof DbTable)) {
                 continue;
@@ -57,18 +58,25 @@ public abstract class BaseSqlGenerator extends AnAction {
             // set clause
             sqlTemplate = sqlTemplate.replaceAll("\\$SET_CLAUSE\\$", generator.getSetClause());
 
-            sql.append(sqlTemplate);
+            sbSql.append(sqlTemplate);
 
             if (psiElements.length > 1) {
-                sql.append(";");
+                sbSql.append(";");
             }
 
-            sql.append(Util.LF);
+            sbSql.append(Util.LF);
 
 
         }
 
-        CopyPasteManager.getInstance().setContents(new StringSelection(sql.toString()));
+        SqlGeneratorConfigComponent.SqlGeneratorConfig sqlGeneratorConfig = SqlGeneratorConfigComponent.getInstance(event.getProject());
+        String sql = sbSql.toString();
+
+        if (sqlGeneratorConfig != null && sqlGeneratorConfig.isBeautySqlFormat()) {
+            sql = formatter.format(sbSql.toString());
+        }
+
+        CopyPasteManager.getInstance().setContents(new StringSelection(sql));
     }
 
     protected SqlGenerator createSqlGenerator(TableInfo tableInfo) {
