@@ -21,6 +21,8 @@ public class BasicFormatterImpl implements Formatter {
     private static final Set<String> QUANTIFIERS = new HashSet<String>();
     private static final Set<String> DML = new HashSet<String>();
     private static final Set<String> MISC = new HashSet<String>();
+    private static final Set<String> EXCLUDE = new HashSet<String>();
+
 
     static {
         BEGIN_CLAUSES.add("left");
@@ -39,6 +41,8 @@ public class BasicFormatterImpl implements Formatter {
         END_CLAUSES.add("join");
         END_CLAUSES.add("into");
         END_CLAUSES.add("union");
+
+        EXCLUDE.add("into");
 
         LOGICAL.add("and");
         LOGICAL.add("or");
@@ -60,7 +64,7 @@ public class BasicFormatterImpl implements Formatter {
         MISC.add("on");
     }
 
-    private static final String INDENT_STRING = "    ";
+    private static final String INDENT_STRING = "  ";
     private static final String INITIAL = System.lineSeparator() + INDENT_STRING;
 
     @Override
@@ -99,7 +103,7 @@ public class BasicFormatterImpl implements Formatter {
 
         public String perform() {
 
-            result.append(INITIAL);
+//            result.append(INITIAL);
 
             while (tokens.hasMoreTokens()) {
                 token = tokens.nextToken();
@@ -256,7 +260,7 @@ public class BasicFormatterImpl implements Formatter {
                     indent--;
                     afterOn = false;
                 }
-                newline();
+                newlineNoIndentString();
             }
             out();
             if (!"union".equals(lcToken)) {
@@ -354,6 +358,11 @@ public class BasicFormatterImpl implements Formatter {
             for (int i = 0; i < indent; i++) {
                 result.append(INDENT_STRING);
             }
+            beginLine = true;
+        }
+
+        private void newlineNoIndentString() {
+            result.append(System.lineSeparator());
             beginLine = true;
         }
     }

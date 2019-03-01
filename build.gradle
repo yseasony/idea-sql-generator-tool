@@ -18,7 +18,7 @@ plugins {
 }
 
 group 'org.yseasony'
-version '2.1.2'
+version '2.2.0'
 
 apply plugin: 'idea'
 apply plugin: 'org.jetbrains.intellij'
@@ -38,9 +38,9 @@ dependencies {
 
 
 intellij {
-    localPath ideaSDKlocalPath //µ÷ÊÔÎÒÃÇ²å¼şµÄ°æ±¾
+    localPath ideaSDKlocalPath //è°ƒè¯•æˆ‘ä»¬æ’ä»¶çš„ç‰ˆæœ¬
     pluginName 'Sql Generator'
-    sandboxDirectory = project.rootDir.canonicalPath + "/.sandbox" //²å¼şÉú³ÉµÄÁÙÊ±ÎÄ¼şµÄµØÖ·
+    sandboxDirectory = project.rootDir.canonicalPath + "/.sandbox" //æ’ä»¶ç”Ÿæˆçš„ä¸´æ—¶æ–‡ä»¶çš„åœ°å€
 }
 
 patchPluginXml {

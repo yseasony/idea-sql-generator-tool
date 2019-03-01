@@ -23,6 +23,7 @@ public class SqlGeneratorConfigGUI {
             sqlGeneratorConfig = new SqlGeneratorConfigComponent.SqlGeneratorConfig();
         }
 
+        beautySqlFormat = sqlGeneratorConfig.isBeautySqlFormat();
         if (sqlGeneratorConfig.isBeautySqlFormat()) {
             beautySqlFormatCheckBox.setSelected(true);
         } else {
@@ -40,7 +41,7 @@ public class SqlGeneratorConfigGUI {
         rootPanel.setRequestFocusEnabled(true);
 
         beautySqlFormatCheckBox = new JCheckBox();
-        beautySqlFormatCheckBox.setText("Beauty sql format");
+        beautySqlFormatCheckBox.setText("Auto SQL formatter");
         beautySqlFormatCheckBox.addActionListener(e -> {
             if (beautySqlFormatCheckBox.isSelected()) {
                 beautySqlFormat = true;
@@ -56,5 +57,7 @@ public class SqlGeneratorConfigGUI {
         sqlGeneratorConfig.setBeautySqlFormat(beautySqlFormat);
     }
 
-
+    public boolean isBeautySqlFormat() {
+        return beautySqlFormat;
+    }
 }

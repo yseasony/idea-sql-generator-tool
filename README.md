@@ -8,7 +8,7 @@ IntelliJ IDEA sql generator plugin [![Donate](https://www.paypal.com/en_US/i/btn
 - Connecting to Your Database:
   - <kbd>View</kbd> > <kbd>Tool Windows</kbd> > <kbd>Database</kbd>
 - Sql Generator
-  - <kbd>Select Table</kbd> > <kbd>Right click popup menu</kbd> > <kbd>Select Sql Generator</kbd>
+  - <kbd>Select Table</kbd> > <kbd>Right click popup menu</kbd> > <kbd>Select Sql Generator</kbd> > <kbd>SQL in your clipboard</kbd>
 
 Installation
 ------------

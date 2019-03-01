@@ -49,13 +49,11 @@ public class SqlGeneratorConfigComponent implements PersistentStateComponent<Sql
     @Nullable
     @Override
     public SqlGeneratorConfig getState() {
-        System.out.println("getState");
         return this.sqlGeneratorConfig;
     }
 
     @Override
     public void loadState(SqlGeneratorConfig sqlGeneratorConfig) {
-        System.out.println("loadState");
         this.sqlGeneratorConfig = sqlGeneratorConfig;
     }
 
