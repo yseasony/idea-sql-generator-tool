@@ -27,3 +27,7 @@ Restart IDE.
 ### Download
 
 Download the [latest release](https://github.com/yseasony/idea-sql-generator-tool/releases).
+
+License
+-------
+Copyright (c) 2019 yseasony. See the [LICENSE](./LICENSE) file for license rights and limitations (BSD).
