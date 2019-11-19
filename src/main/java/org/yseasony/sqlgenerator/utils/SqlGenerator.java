@@ -1,9 +1,12 @@
 package org.yseasony.sqlgenerator.utils;
 
-import com.intellij.database.model.DasColumn;
-import org.apache.commons.lang.StringUtils;
-
 import java.util.List;
+
+import com.google.common.base.Joiner;
+import com.google.common.collect.Lists;
+import com.intellij.database.model.DasColumn;
+import com.intellij.database.util.DasUtil;
+import org.apache.commons.lang.StringUtils;
 
 public class SqlGenerator {
 
@@ -44,5 +47,17 @@ public class SqlGenerator {
             setClause.append(" ").append(columnElement.getName()).append(" = ?");
         }
         return setClause.toString();
+    }
+
+    public String getDuplicateSetClause() {
+        List<DasColumn> columns = tableInfo.getNonPrimaryColumns();
+        List<String> columnList = Lists.newArrayList();
+        for (DasColumn column : columns) {
+            if (!DasUtil.isIndexColumn(column)) {
+                columnList.add(" " + column.getName() + " = ?");
+            }
+        }
+
+        return Joiner.on(",").join(columnList);
     }
 }

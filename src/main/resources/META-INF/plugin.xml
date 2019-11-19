@@ -22,6 +22,10 @@
             <h1>idea Sql Generator plugin</h1><br/>
             <ul>
                  <li>
+                    Sql Generator v2.2.1<br/>
+                    Support INSERT INTO ... ON DUPLICATE KEY
+                 </li>
+                 <li>
                     Sql Generator v2.2.0<br/>
                     Support Auto SQL formatter
                 </li>

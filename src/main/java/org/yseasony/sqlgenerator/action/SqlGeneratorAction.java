@@ -8,10 +8,6 @@ import com.intellij.openapi.actionSystem.LangDataKeys;
 import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.yseasony.sqlgenerator.action.DeleteSqlGeneratorAction;
-import org.yseasony.sqlgenerator.action.InsertSqlGeneratorAction;
-import org.yseasony.sqlgenerator.action.SelectSqlGeneratorAction;
-import org.yseasony.sqlgenerator.action.UpdateSqlGeneratorAction;
 
 /**
  * 类SqlGeneratorAction.java
@@ -38,14 +34,17 @@ public class SqlGeneratorAction extends ActionGroup {
     @NotNull
     @Override
     public AnAction[] getChildren(@Nullable AnActionEvent anActionEvent) {
-        return new AnAction[]{new SelectSqlGeneratorAction(),
-                new SelectSqlGeneratorAction.NamedParameterSqlGeneratorAction(),
-                new InsertSqlGeneratorAction(),
-                new InsertSqlGeneratorAction.NamedParameterSqlGeneratorAction(),
-                new DeleteSqlGeneratorAction(),
-                new DeleteSqlGeneratorAction.NamedParameterSqlGeneratorAction(),
-                new UpdateSqlGeneratorAction(),
-                new UpdateSqlGeneratorAction.NamedParameterSqlGeneratorAction()};
+        return new AnAction[] {new SelectSqlGeneratorAction(),
+            new SelectSqlGeneratorAction.NamedParameterSqlGeneratorAction(),
+            new InsertSqlGeneratorAction(),
+            new InsertSqlGeneratorAction.NamedParameterSqlGeneratorAction(),
+            new DeleteSqlGeneratorAction(),
+            new DeleteSqlGeneratorAction.NamedParameterSqlGeneratorAction(),
+            new UpdateSqlGeneratorAction(),
+            new UpdateSqlGeneratorAction.NamedParameterSqlGeneratorAction(),
+            new DuplicateKeyUpdateSqlGeneratorAction(),
+            new DuplicateKeyUpdateSqlGeneratorAction.NamedParameterSqlGeneratorAction(),
+        };
     }
 
 }
