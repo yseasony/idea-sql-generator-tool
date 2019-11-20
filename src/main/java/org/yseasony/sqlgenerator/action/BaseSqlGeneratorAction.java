@@ -58,6 +58,8 @@ public abstract class BaseSqlGeneratorAction extends AnAction {
             // set clause
             sqlTemplate = sqlTemplate.replaceAll("\\$SET_CLAUSE\\$", generator.getSetClause());
 
+            sqlTemplate = sqlTemplate.replaceAll("\\$DUPLICATE_SET_CLAUSE\\$", generator.getDuplicateSetClause());
+
             sbSql.append(sqlTemplate);
 
             if (psiElements.length > 1) {
