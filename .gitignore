@@ -1,0 +1,31 @@
+# Eclipse
+.classpath
+.project
+.settings/
+bin/
+
+
+# Intellij
+.idea/
+*.iml
+*.iws
+lib/
+
+
+# gradle
+.sandbox/
+.gradle/
+build/
+gradle/
+gradlew
+gradlew.bat
+
+
+# Maven
+log/
+target/
+
+# For my local copy of SVN branch
+.svn/
+
+logs

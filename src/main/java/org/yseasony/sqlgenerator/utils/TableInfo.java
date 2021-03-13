@@ -6,10 +6,7 @@ import com.intellij.database.psi.DbTable;
 import com.intellij.database.util.DasUtil;
 import com.intellij.util.containers.JBIterable;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class TableInfo {
 
@@ -38,7 +35,8 @@ public class TableInfo {
     }
 
     public String getTableName() {
-        return tableElement.getName();
+        return Optional.ofNullable(tableElement.getParent()).map(p -> p.getName() + ".").orElse("")
+                +  tableElement.getName();
     }
 
     public List<DasColumn> getColumns() {
