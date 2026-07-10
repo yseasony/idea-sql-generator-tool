@@ -3,9 +3,9 @@ package org.yseasony.sqlgenerator.configurable;
 import com.intellij.openapi.project.Project;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
-import com.intellij.util.ui.JBUI;
 
 import javax.swing.*;
+import java.awt.Insets;
 
 /**
  * Created by yelei.yl on 2018/1/23.
@@ -37,7 +37,7 @@ public class SqlGeneratorConfigGUI {
 
     public SqlGeneratorConfigGUI() {
         this.rootPanel = new JPanel();
-        rootPanel.setLayout(new GridLayoutManager(3, 2, JBUI.emptyInsets(), -1, -1));
+        rootPanel.setLayout(new GridLayoutManager(3, 2, new Insets(0, 0, 0, 0), -1, -1));
         rootPanel.setRequestFocusEnabled(true);
 
         beautySqlFormatCheckBox = new JCheckBox();

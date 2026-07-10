@@ -1,10 +1,10 @@
 package org.yseasony.sqlgenerator.configurable;
 
 import com.intellij.openapi.components.PersistentStateComponent;
-import com.intellij.openapi.components.ServiceManager;
 import com.intellij.openapi.components.State;
 import com.intellij.openapi.components.Storage;
 import com.intellij.openapi.project.Project;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -12,7 +12,7 @@ import org.jetbrains.annotations.Nullable;
  */
 @State(
         name = "SqlGeneratorConfigComponent",
-        storages = @Storage(file = "sqlGenerator.xml")
+        storages = @Storage("sqlGenerator.xml")
 )
 public class SqlGeneratorConfigComponent implements PersistentStateComponent<SqlGeneratorConfigComponent.SqlGeneratorConfig> {
 
@@ -53,13 +53,13 @@ public class SqlGeneratorConfigComponent implements PersistentStateComponent<Sql
     }
 
     @Override
-    public void loadState(SqlGeneratorConfig sqlGeneratorConfig) {
+    public void loadState(@NotNull SqlGeneratorConfig sqlGeneratorConfig) {
         this.sqlGeneratorConfig = sqlGeneratorConfig;
     }
 
     @Nullable
     public static SqlGeneratorConfig getInstance(Project project) {
-        SqlGeneratorConfigComponent sqlGeneratorConfigComponent = ServiceManager.getService(project, SqlGeneratorConfigComponent.class);
+        SqlGeneratorConfigComponent sqlGeneratorConfigComponent = project.getService(SqlGeneratorConfigComponent.class);
         return sqlGeneratorConfigComponent.getSqlGeneratorConfig();
     }
 

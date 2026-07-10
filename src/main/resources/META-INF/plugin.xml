@@ -1,7 +1,6 @@
-<idea-plugin version="2">
+<idea-plugin>
     <id>org.yseasony.sqlgenerator</id>
     <name>Sql Generator</name>
-    <version>2.1.1</version>
     <vendor email="yseasony@gmail.com" url="https://github.com/yseasony">yseasony</vendor>
 
     <description>
@@ -21,6 +20,10 @@
         <![CDATA[
             <h1>idea Sql Generator plugin</h1><br/>
             <ul>
+                 <li>
+                    Sql Generator v2.3.0<br/>
+                    Fix deprecated API usages, compatible with IDE 2024.2+
+                 </li>
                  <li>
                     Sql Generator v2.2.1<br/>
                     Support INSERT INTO ... ON DUPLICATE KEY
@@ -56,44 +59,19 @@
         ]]>
     </change-notes>
 
-    <!-- please see http://confluence.jetbrains.com/display/IDEADEV/Build+Number+Ranges for description -->
-    <idea-version since-build="143"/>
-
-    <!-- please see http://confluence.jetbrains.com/display/IDEADEV/Plugin+Compatibility+with+IntelliJ+Platform+Products
-         on how to target different products -->
-    <!-- uncomment to enable plugin in all products
-    <depends>com.intellij.modules.lang</depends>
-    -->
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.database</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <!-- Add your extensions here -->
-    </extensions>
-
-    <application-components>
-        <component>
-            <implementation-class>org.yseasony.sqlgenerator.component.SqlComponent</implementation-class>
-        </component>
-    </application-components>
-
-    <project-components>
-        <!--<component>-->
-            <!--<implementation-class>org.yseasony.sqlgenerator.configurable.SqlGeneratorConfigComponent</implementation-class>-->
-        <!--</component>-->
-    </project-components>
-
-    <depends optional="true">com.intellij.database</depends>
-    <depends optional="true">com.intellij.modules.ultimate</depends>
-
-    <extensions defaultExtensionNs="com.intellij">
-        <projectConfigurable groupId="root" displayName="SqlGenerator" id="sqlGeneratorConfig"
+        <projectConfigurable groupId="tools" displayName="SqlGenerator" id="sqlGeneratorConfig"
                              instance="org.yseasony.sqlgenerator.configurable.SqlGeneratorConfigPage"/>
         <projectService serviceImplementation="org.yseasony.sqlgenerator.configurable.SqlGeneratorConfigComponent"/>
     </extensions>
 
     <actions>
-        <action id="sqlGenerate" class="org.yseasony.sqlgenerator.action.SqlGeneratorAction">
+        <group id="sqlGenerate" class="org.yseasony.sqlgenerator.action.SqlGeneratorAction" popup="true">
             <add-to-group group-id="DatabaseViewPopupMenu" anchor="last"/>
-        </action>
+        </group>
     </actions>
 
 </idea-plugin>

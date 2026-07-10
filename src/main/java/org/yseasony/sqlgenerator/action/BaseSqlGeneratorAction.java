@@ -3,7 +3,7 @@ package org.yseasony.sqlgenerator.action;
 import com.intellij.database.psi.DbTable;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.LangDataKeys;
+import com.intellij.openapi.actionSystem.PlatformCoreDataKeys;
 import com.intellij.openapi.ide.CopyPasteManager;
 import com.intellij.psi.PsiElement;
 import org.yseasony.sqlgenerator.configurable.SqlGeneratorConfigComponent;
@@ -28,7 +28,7 @@ public abstract class BaseSqlGeneratorAction extends AnAction {
 
     @Override
     public void actionPerformed(AnActionEvent event) {
-        PsiElement[] psiElements = event.getData(LangDataKeys.PSI_ELEMENT_ARRAY);
+        PsiElement[] psiElements = event.getData(PlatformCoreDataKeys.PSI_ELEMENT_ARRAY);
         if (psiElements == null || psiElements.length == 0) {
             return;
         }
