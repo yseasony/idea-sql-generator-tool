@@ -2,9 +2,10 @@ package org.yseasony.sqlgenerator.action;
 
 import com.intellij.database.psi.DbTable;
 import com.intellij.openapi.actionSystem.ActionGroup;
+import com.intellij.openapi.actionSystem.ActionUpdateThread;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
-import com.intellij.openapi.actionSystem.LangDataKeys;
+import com.intellij.openapi.actionSystem.CommonDataKeys;
 import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -21,8 +22,13 @@ public class SqlGeneratorAction extends ActionGroup {
     }
 
     @Override
+    public ActionUpdateThread getActionUpdateThread() {
+        return ActionUpdateThread.BGT;
+    }
+
+    @Override
     public void update(AnActionEvent e) {
-        PsiElement psiElement = e.getData(LangDataKeys.PSI_ELEMENT);
+        PsiElement psiElement = e.getData(CommonDataKeys.PSI_ELEMENT);
         if (psiElement == null) {
             return;
         }

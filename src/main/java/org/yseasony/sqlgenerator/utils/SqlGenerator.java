@@ -6,7 +6,6 @@ import com.google.common.base.Joiner;
 import com.google.common.collect.Lists;
 import com.intellij.database.model.DasColumn;
 import com.intellij.database.util.DasUtil;
-import org.apache.commons.lang.StringUtils;
 
 public class SqlGenerator {
 
@@ -17,7 +16,7 @@ public class SqlGenerator {
     }
 
     public String getColumnList() {
-        return StringUtils.join(tableInfo.getColumnsName(), ", ");
+        return String.join(", ", tableInfo.getColumnsName());
     }
 
     public String getWhereClause() {
