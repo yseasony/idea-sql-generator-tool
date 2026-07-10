@@ -22,7 +22,13 @@
             <ul>
                  <li>
                     Sql Generator v2.3.0<br/>
-                    Fix deprecated API usages, compatible with IDE 2024.2+
+                    - Compatible with new IDE versions (2024.2+ ~ 2026.x), fully passes JetBrains Marketplace verification<br/>
+                    - Fix all deprecated and scheduled-for-removal API usages<br/>
+                    - Fix plugin configuration defects (plugin dependencies, action group registration)<br/>
+                    - Settings page moved to Settings | Tools | SqlGenerator<br/>
+                    - Plugin can now be installed and updated without IDE restart<br/>
+                    - Build system migrated to IntelliJ Platform Gradle Plugin 2.x<br/>
+                    - Note: this version requires IDE 2024.2 or newer; older IDEs keep v2.2.1
                  </li>
                  <li>
                     Sql Generator v2.2.1<br/>
