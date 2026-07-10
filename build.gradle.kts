@@ -47,4 +47,8 @@ intellijPlatform {
             create(IntelliJPlatformType.IntellijIdeaUltimate, "2026.1.4")
         }
     }
+    publishing {
+        token = providers.gradleProperty("intellijPlatformPublishingToken")
+            .orElse(providers.environmentVariable("PUBLISH_TOKEN"))
+    }
 }
