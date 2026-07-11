@@ -37,8 +37,11 @@ public class TableInfo {
         this.columns = columns;
     }
 
-    public String getTableName() {
-        return tableElement.getName();
+    public String getTableName(boolean useSchemaPrefix) {
+        if (!useSchemaPrefix) {
+            return tableElement.getName();
+        }
+        return Util.qualifyTableName(DasUtil.getSchema(tableElement), tableElement.getName());
     }
 
     public List<DasColumn> getColumns() {

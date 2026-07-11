@@ -33,6 +33,9 @@ public abstract class BaseSqlGeneratorAction extends AnAction {
             return;
         }
 
+        SqlGeneratorConfigComponent.SqlGeneratorConfig sqlGeneratorConfig = SqlGeneratorConfigComponent.getInstance(event.getProject());
+        boolean useSchemaPrefix = sqlGeneratorConfig != null && sqlGeneratorConfig.isUseSchemaPrefix();
+
         StringBuilder sbSql = new StringBuilder();
         for (PsiElement psiElement : psiElements) {
             if (!(psiElement instanceof DbTable)) {
@@ -42,7 +45,7 @@ public abstract class BaseSqlGeneratorAction extends AnAction {
             TableInfo tableInfo = new TableInfo((DbTable) psiElement);
             String sqlTemplate = getSqlTemplate();
             // table name
-            sqlTemplate = sqlTemplate.replaceAll("\\$TABLE_NAME\\$", tableInfo.getTableName());
+            sqlTemplate = sqlTemplate.replaceAll("\\$TABLE_NAME\\$", tableInfo.getTableName(useSchemaPrefix));
 
             // column list
             SqlGenerator generator = createSqlGenerator(tableInfo);
@@ -71,7 +74,6 @@ public abstract class BaseSqlGeneratorAction extends AnAction {
 
         }
 
-        SqlGeneratorConfigComponent.SqlGeneratorConfig sqlGeneratorConfig = SqlGeneratorConfigComponent.getInstance(event.getProject());
         String sql = sbSql.toString();
 
         if (sqlGeneratorConfig != null && sqlGeneratorConfig.isBeautySqlFormat()) {

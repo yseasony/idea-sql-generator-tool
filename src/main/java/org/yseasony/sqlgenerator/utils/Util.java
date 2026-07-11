@@ -10,6 +10,13 @@ public final class Util {
      */
     public static final String LF = System.getProperty("line.separator");
 
+    public static String qualifyTableName(String schema, String tableName) {
+        if (schema == null || schema.isEmpty()) {
+            return tableName;
+        }
+        return schema + "." + tableName;
+    }
+
     public static String makeWhereClause(List<String> columns) {
         if (columns == null || columns.isEmpty()) {
             return "";
