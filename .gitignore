@@ -5,3 +5,6 @@ build/
 .idea/
 *.iml
 out/
+
+# local design specs (superpowers workflow), not for the repo
+docs/superpowers/
