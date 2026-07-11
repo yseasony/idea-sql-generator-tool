@@ -49,4 +49,11 @@ public class UtilTest {
         assertEquals("WHERE id = :id AND tenant_id = :tenantId",
                 Util.makeNamedWhereClause(Arrays.asList("id", "tenant_id")));
     }
+
+    @Test
+    public void convertCamelCaseForNamedParameters() {
+        assertEquals("userName", Util.convertCamelCase("user_name"));
+        assertEquals("id", Util.convertCamelCase("id"));
+        assertEquals("createdAt", Util.convertCamelCase("CREATED_AT"));
+    }
 }

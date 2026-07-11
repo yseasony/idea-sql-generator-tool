@@ -25,7 +25,8 @@
                     - New option "Qualify table name with schema": generated SQL uses schema.table (Settings | Tools | SqlGenerator, off by default)<br/>
                     - Much prettier SQL formatting (now powered by sql-formatter): proper INSERT and ON DUPLICATE KEY UPDATE layout, named parameters kept intact<br/>
                     - Multi-table generation now formats each statement separately instead of garbling them<br/>
-                    - Cleaner spacing in generated SQL (no more double spaces or trailing whitespace)
+                    - Cleaner spacing in generated SQL (no more double spaces or trailing whitespace)<br/>
+                    - Named-parameter ON DUPLICATE KEY UPDATE now uses camelCase placeholders (:userName), consistent with the other named-parameter generators
                  </li>
                  <li>
                     Sql Generator v2.3.0<br/>
