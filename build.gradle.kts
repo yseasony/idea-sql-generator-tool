@@ -21,6 +21,7 @@ dependencies {
         bundledPlugin("com.intellij.database")
         pluginVerifier()
     }
+    implementation("com.github.vertical-blank:sql-formatter:2.0.5")
     testImplementation("junit:junit:4.13.2")
 }
 

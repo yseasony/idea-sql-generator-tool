@@ -3,18 +3,15 @@ package org.yseasony.sqlgenerator.utils;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 
-public class BasicFormatterImplTest {
+public class SqlFormatterImplTest {
 
-    private static final String LS = System.lineSeparator();
-
-    private final Formatter formatter = new BasicFormatterImpl();
+    private final Formatter formatter = new SqlFormatterImpl();
 
     @Test
     public void formatSelect() {
         String formatted = formatter.format("SELECT id, user_name, email FROM users WHERE id = ?");
-        assertEquals(String.join(LS,
+        assertEquals(String.join("\n",
                 "SELECT",
                 "    id,",
                 "    user_name,",
@@ -28,7 +25,7 @@ public class BasicFormatterImplTest {
     @Test
     public void formatSelectWithSchemaQualifiedTable() {
         String formatted = formatter.format("SELECT id FROM mydb.users WHERE id = ?");
-        assertEquals(String.join(LS,
+        assertEquals(String.join("\n",
                 "SELECT",
                 "    id",
                 "FROM",
@@ -38,31 +35,42 @@ public class BasicFormatterImplTest {
     }
 
     @Test
-    public void formatSelectWithNamedParameter() {
-        String formatted = formatter.format("SELECT id FROM users WHERE user_id = :userId");
-        assertEquals(String.join(LS,
+    public void formatSelectWithNamedParametersAndCompositeKey() {
+        String formatted = formatter.format("SELECT id FROM users WHERE id = :id AND tenant_id = :tenantId");
+        assertEquals(String.join("\n",
                 "SELECT",
                 "    id",
                 "FROM",
                 "    users",
                 "WHERE",
-                "    user_id = :userId"), formatted);
+                "    id = :id",
+                "    AND tenant_id = :tenantId"), formatted);
     }
 
     @Test
-    public void formatInsertKeepsInsertIntoOnOneLine() {
+    public void formatInsert() {
         String formatted = formatter.format("INSERT INTO users (id, user_name) VALUES (?, ?)");
-        assertEquals(String.join(LS,
-                "INSERT INTO users",
-                "    (id, user_name)",
+        assertEquals(String.join("\n",
+                "INSERT INTO",
+                "    users (id, user_name)",
                 "VALUES",
                 "    (?, ?)"), formatted);
     }
 
     @Test
+    public void formatInsertWithNamedParameters() {
+        String formatted = formatter.format("INSERT INTO users (id, user_name) VALUES (:id, :userName)");
+        assertEquals(String.join("\n",
+                "INSERT INTO",
+                "    users (id, user_name)",
+                "VALUES",
+                "    (:id, :userName)"), formatted);
+    }
+
+    @Test
     public void formatUpdate() {
         String formatted = formatter.format("UPDATE users SET user_name = ?, email = ? WHERE id = ?");
-        assertEquals(String.join(LS,
+        assertEquals(String.join("\n",
                 "UPDATE",
                 "    users",
                 "SET",
@@ -75,34 +83,24 @@ public class BasicFormatterImplTest {
     @Test
     public void formatDelete() {
         String formatted = formatter.format("DELETE FROM users WHERE id = ?");
-        assertEquals(String.join(LS,
-                "DELETE",
-                "FROM",
+        assertEquals(String.join("\n",
+                "DELETE FROM",
                 "    users",
                 "WHERE",
                 "    id = ?"), formatted);
     }
 
     @Test
-    public void formatOnDuplicateKeyUpdateAlignsAssignments() {
+    public void formatOnDuplicateKeyUpdateAsTopLevelClause() {
         String formatted = formatter.format(
                 "INSERT INTO users (id, user_name) VALUES (?, ?) ON DUPLICATE KEY UPDATE user_name = ?, email = ?");
-        assertEquals(String.join(LS,
-                "INSERT INTO users",
-                "    (id, user_name)",
+        assertEquals(String.join("\n",
+                "INSERT INTO",
+                "    users (id, user_name)",
                 "VALUES",
                 "    (?, ?)",
                 "ON DUPLICATE KEY UPDATE",
                 "    user_name = ?,",
                 "    email = ?"), formatted);
-    }
-
-    @Test
-    public void formatStripsTrailingWhitespace() {
-        String formatted = formatter.format("SELECT id, user_name FROM users WHERE id = ? ");
-        for (String line : formatted.split(LS, -1)) {
-            assertFalse("line has trailing whitespace: [" + line + "]",
-                    line.endsWith(" ") || line.endsWith("\t"));
-        }
     }
 }

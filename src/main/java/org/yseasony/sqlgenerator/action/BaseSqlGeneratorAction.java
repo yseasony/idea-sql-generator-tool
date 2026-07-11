@@ -18,7 +18,7 @@ import java.awt.datatransfer.StringSelection;
  */
 public abstract class BaseSqlGeneratorAction extends AnAction {
 
-    private Formatter formatter = new BasicFormatterImpl();
+    private Formatter formatter = new SqlFormatterImpl();
 
     public BaseSqlGeneratorAction(String text) {
         super(text);
