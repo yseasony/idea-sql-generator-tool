@@ -51,7 +51,7 @@ public class DuplicateKeyUpdateSqlGeneratorAction extends BaseSqlGeneratorAction
                     for (int i = 0; i < columns.size(); i++) {
                         DasColumn columnElement = columns.get(i);
                         if (i != 0) {
-                            values.append(",");
+                            values.append(", ");
                         }
                         values.append(":").append(Util.convertCamelCase(columnElement.getName()));
                     }
@@ -64,11 +64,11 @@ public class DuplicateKeyUpdateSqlGeneratorAction extends BaseSqlGeneratorAction
                     List<String> columnList = Lists.newArrayList();
                     for (DasColumn column : columns) {
                         if (!DasUtil.isIndexColumn(column)) {
-                            columnList.add(" " + column.getName() + " = :" + column.getName());
+                            columnList.add(column.getName() + " = :" + Util.convertCamelCase(column.getName()));
                         }
                     }
 
-                    return Joiner.on(",").join(columnList);
+                    return Joiner.on(", ").join(columnList);
                 }
             };
         }

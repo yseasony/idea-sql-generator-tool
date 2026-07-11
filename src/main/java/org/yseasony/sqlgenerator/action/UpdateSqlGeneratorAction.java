@@ -46,10 +46,10 @@ public class UpdateSqlGeneratorAction extends BaseSqlGeneratorAction {
                     for (int i = 0; i < columns.size(); i++) {
                         DasColumn element = columns.get(i);
                         if (i != 0) {
-                            sb.append(',');
+                            sb.append(", ");
                         }
                         String columnName = element.getName();
-                        sb.append(" ").append(columnName).append(" = :")
+                        sb.append(columnName).append(" = :")
                                 .append(Util.convertCamelCase(columnName));
                     }
                     return sb.toString();

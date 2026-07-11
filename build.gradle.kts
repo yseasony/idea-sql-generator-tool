@@ -6,7 +6,7 @@ plugins {
 }
 
 group = "org.yseasony"
-version = "2.3.0"
+version = "2.3.1"
 
 repositories {
     mavenCentral()
@@ -21,6 +21,7 @@ dependencies {
         bundledPlugin("com.intellij.database")
         pluginVerifier()
     }
+    implementation("com.github.vertical-blank:sql-formatter:2.0.5")
     testImplementation("junit:junit:4.13.2")
 }
 

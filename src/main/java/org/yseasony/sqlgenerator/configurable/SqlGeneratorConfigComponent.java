@@ -23,6 +23,8 @@ public class SqlGeneratorConfigComponent implements PersistentStateComponent<Sql
 
         private boolean beautySqlFormat;
 
+        private boolean useSchemaPrefix;
+
         public String getPluginVersion() {
             return pluginVersion;
         }
@@ -33,6 +35,14 @@ public class SqlGeneratorConfigComponent implements PersistentStateComponent<Sql
 
         public boolean isBeautySqlFormat() {
             return beautySqlFormat;
+        }
+
+        public boolean isUseSchemaPrefix() {
+            return useSchemaPrefix;
+        }
+
+        public void setUseSchemaPrefix(boolean useSchemaPrefix) {
+            this.useSchemaPrefix = useSchemaPrefix;
         }
 
         public void setBeautySqlFormat(boolean beautySqlFormat) {

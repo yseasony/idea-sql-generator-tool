@@ -18,7 +18,7 @@ import java.awt.datatransfer.StringSelection;
  */
 public abstract class BaseSqlGeneratorAction extends AnAction {
 
-    private Formatter formatter = new BasicFormatterImpl();
+    private Formatter formatter = new SqlFormatterImpl();
 
     public BaseSqlGeneratorAction(String text) {
         super(text);
@@ -33,6 +33,10 @@ public abstract class BaseSqlGeneratorAction extends AnAction {
             return;
         }
 
+        SqlGeneratorConfigComponent.SqlGeneratorConfig sqlGeneratorConfig = SqlGeneratorConfigComponent.getInstance(event.getProject());
+        boolean useSchemaPrefix = sqlGeneratorConfig != null && sqlGeneratorConfig.isUseSchemaPrefix();
+        boolean beautySqlFormat = sqlGeneratorConfig != null && sqlGeneratorConfig.isBeautySqlFormat();
+
         StringBuilder sbSql = new StringBuilder();
         for (PsiElement psiElement : psiElements) {
             if (!(psiElement instanceof DbTable)) {
@@ -42,7 +46,7 @@ public abstract class BaseSqlGeneratorAction extends AnAction {
             TableInfo tableInfo = new TableInfo((DbTable) psiElement);
             String sqlTemplate = getSqlTemplate();
             // table name
-            sqlTemplate = sqlTemplate.replaceAll("\\$TABLE_NAME\\$", tableInfo.getTableName());
+            sqlTemplate = sqlTemplate.replaceAll("\\$TABLE_NAME\\$", tableInfo.getTableName(useSchemaPrefix));
 
             // column list
             SqlGenerator generator = createSqlGenerator(tableInfo);
@@ -60,25 +64,21 @@ public abstract class BaseSqlGeneratorAction extends AnAction {
 
             sqlTemplate = sqlTemplate.replaceAll("\\$DUPLICATE_SET_CLAUSE\\$", generator.getDuplicateSetClause());
 
-            sbSql.append(sqlTemplate);
+            // format each statement separately: the formatter has no notion of ";" separators
+            String statement = sqlTemplate.trim();
+            if (beautySqlFormat) {
+                statement = formatter.format(statement);
+            }
+            sbSql.append(statement);
 
             if (psiElements.length > 1) {
                 sbSql.append(";");
             }
 
             sbSql.append(Util.LF);
-
-
         }
 
-        SqlGeneratorConfigComponent.SqlGeneratorConfig sqlGeneratorConfig = SqlGeneratorConfigComponent.getInstance(event.getProject());
-        String sql = sbSql.toString();
-
-        if (sqlGeneratorConfig != null && sqlGeneratorConfig.isBeautySqlFormat()) {
-            sql = formatter.format(sbSql.toString());
-        }
-
-        CopyPasteManager.getInstance().setContents(new StringSelection(sql));
+        CopyPasteManager.getInstance().setContents(new StringSelection(sbSql.toString()));
     }
 
     protected SqlGenerator createSqlGenerator(TableInfo tableInfo) {

@@ -3,6 +3,7 @@ package org.yseasony.sqlgenerator.configurable;
 import com.intellij.openapi.project.Project;
 import com.intellij.uiDesigner.core.GridConstraints;
 import com.intellij.uiDesigner.core.GridLayoutManager;
+import com.intellij.uiDesigner.core.Spacer;
 
 import javax.swing.*;
 import java.awt.Insets;
@@ -15,7 +16,9 @@ public class SqlGeneratorConfigGUI {
     private SqlGeneratorConfigComponent.SqlGeneratorConfig sqlGeneratorConfig;
     private JPanel rootPanel;
     private JCheckBox beautySqlFormatCheckBox;
+    private JCheckBox useSchemaPrefixCheckBox;
     private boolean beautySqlFormat;
+    private boolean useSchemaPrefix;
 
     public void createUI(Project project) {
         sqlGeneratorConfig = SqlGeneratorConfigComponent.getInstance(project);
@@ -29,6 +32,9 @@ public class SqlGeneratorConfigGUI {
         } else {
             beautySqlFormatCheckBox.setSelected(false);
         }
+
+        useSchemaPrefix = sqlGeneratorConfig.isUseSchemaPrefix();
+        useSchemaPrefixCheckBox.setSelected(useSchemaPrefix);
     }
 
     public JPanel getRootPanel() {
@@ -50,14 +56,27 @@ public class SqlGeneratorConfigGUI {
             }
         });
 
-        rootPanel.add(beautySqlFormatCheckBox, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_NORTH, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_CAN_GROW, null, null, null, 0, false));
+        rootPanel.add(beautySqlFormatCheckBox, new GridConstraints(0, 1, 1, 1, GridConstraints.ANCHOR_NORTH, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+
+        useSchemaPrefixCheckBox = new JCheckBox();
+        useSchemaPrefixCheckBox.setText("Qualify table name with schema");
+        useSchemaPrefixCheckBox.addActionListener(e -> useSchemaPrefix = useSchemaPrefixCheckBox.isSelected());
+
+        rootPanel.add(useSchemaPrefixCheckBox, new GridConstraints(1, 1, 1, 1, GridConstraints.ANCHOR_NORTH, GridConstraints.FILL_HORIZONTAL, GridConstraints.SIZEPOLICY_CAN_SHRINK | GridConstraints.SIZEPOLICY_WANT_GROW, GridConstraints.SIZEPOLICY_FIXED, null, null, null, 0, false));
+
+        rootPanel.add(new Spacer(), new GridConstraints(2, 0, 1, 2, GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_VERTICAL, GridConstraints.SIZEPOLICY_CAN_SHRINK, GridConstraints.SIZEPOLICY_CAN_GROW | GridConstraints.SIZEPOLICY_WANT_GROW, null, null, null, 0, false));
     }
 
     public void apply() {
         sqlGeneratorConfig.setBeautySqlFormat(beautySqlFormat);
+        sqlGeneratorConfig.setUseSchemaPrefix(useSchemaPrefix);
     }
 
     public boolean isBeautySqlFormat() {
         return beautySqlFormat;
+    }
+
+    public boolean isUseSchemaPrefix() {
+        return useSchemaPrefix;
     }
 }

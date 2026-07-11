@@ -51,7 +51,8 @@ public class SqlGeneratorConfigPage implements SearchableConfigurable, Configura
 
     @Override
     public boolean isModified() {
-        return sqlGeneratorConfig.isBeautySqlFormat() != configGUI.isBeautySqlFormat();
+        return sqlGeneratorConfig.isBeautySqlFormat() != configGUI.isBeautySqlFormat()
+                || sqlGeneratorConfig.isUseSchemaPrefix() != configGUI.isUseSchemaPrefix();
     }
 
     @Override
