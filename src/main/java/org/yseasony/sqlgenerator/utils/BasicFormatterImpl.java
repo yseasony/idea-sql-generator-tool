@@ -69,7 +69,7 @@ public class BasicFormatterImpl implements Formatter {
 
     @Override
     public String format(String source) {
-        return new FormatProcess(source).perform();
+        return new FormatProcess(source).perform().replaceAll("(?m)[ \\t]+$", "");
     }
 
     private static class FormatProcess {
@@ -78,12 +78,14 @@ public class BasicFormatterImpl implements Formatter {
         boolean afterByOrSetOrFromOrSelect;
         boolean afterValues;
         boolean afterOn;
+        boolean afterOnDuplicateKey;
         boolean afterBetween;
         boolean afterInsert;
         int inFunction;
         int parensSinceSelect;
         private LinkedList<Integer> parenCounts = new LinkedList<Integer>();
         private LinkedList<Boolean> afterByOrFromOrSelects = new LinkedList<Boolean>();
+        private LinkedList<String> lookahead = new LinkedList<String>();
 
         int indent = 1;
 
@@ -105,8 +107,8 @@ public class BasicFormatterImpl implements Formatter {
 
 //            result.append(INITIAL);
 
-            while (tokens.hasMoreTokens()) {
-                token = tokens.nextToken();
+            while (tokens.hasMoreTokens() || !lookahead.isEmpty()) {
+                token = lookahead.isEmpty() ? tokens.nextToken() : lookahead.removeFirst();
                 lcToken = token.toLowerCase(Locale.ROOT);
 
                 if ("'".equals(token)) {
@@ -146,16 +148,27 @@ public class BasicFormatterImpl implements Formatter {
                     closeParen();
                 } else if (BEGIN_CLAUSES.contains(lcToken)) {
                     beginNewClause();
+                } else if ("into".equals(lcToken) && "insert".equals(lastToken)) {
+                    // keep "INSERT INTO" on one line
+                    out();
+                    beginLine = false;
                 } else if (END_CLAUSES.contains(lcToken)) {
                     endNewClause();
                 } else if ("select".equals(lcToken)) {
                     select();
+                } else if (afterOnDuplicateKey && "update".equals(lcToken)) {
+                    onDuplicateKeyUpdate();
                 } else if (DML.contains(lcToken)) {
                     updateOrInsertOrDelete();
                 } else if ("values".equals(lcToken)) {
                     values();
                 } else if ("on".equals(lcToken)) {
-                    on();
+                    // MySQL "ON DUPLICATE KEY UPDATE" is a clause, not a join condition
+                    if ("duplicate".equals(peekNextNonWhitespaceLower())) {
+                        startOnDuplicateKey();
+                    } else {
+                        on();
+                    }
                 } else if (afterBetween && lcToken.equals("and")) {
                     misc();
                     afterBetween = false;
@@ -203,6 +216,36 @@ public class BasicFormatterImpl implements Formatter {
             newline();
             out();
             beginLine = false;
+        }
+
+        private void startOnDuplicateKey() {
+            newlineNoIndentString();
+            out();
+            beginLine = false;
+            afterOnDuplicateKey = true;
+        }
+
+        private void onDuplicateKeyUpdate() {
+            out();
+            afterOnDuplicateKey = false;
+            afterByOrSetOrFromOrSelect = true;
+            newline();
+        }
+
+        private String peekNextNonWhitespaceLower() {
+            for (String ahead : lookahead) {
+                if (!isWhitespace(ahead)) {
+                    return ahead.toLowerCase(Locale.ROOT);
+                }
+            }
+            while (tokens.hasMoreTokens()) {
+                String ahead = tokens.nextToken();
+                lookahead.addLast(ahead);
+                if (!isWhitespace(ahead)) {
+                    return ahead.toLowerCase(Locale.ROOT);
+                }
+            }
+            return null;
         }
 
         private void misc() {
@@ -288,10 +331,8 @@ public class BasicFormatterImpl implements Formatter {
         }
 
         private void values() {
-            indent--;
-            newline();
+            newlineNoIndentString();
             out();
-            indent++;
             newline();
             afterValues = true;
         }
