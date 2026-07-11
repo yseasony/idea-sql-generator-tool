@@ -45,7 +45,7 @@ public class InsertSqlGeneratorAction extends BaseSqlGeneratorAction {
                     for (int i = 0; i < columns.size(); i++) {
                         DasColumn columnElement = columns.get(i);
                         if (i != 0) {
-                            values.append(",");
+                            values.append(", ");
                         }
                         values.append(":").append(Util.convertCamelCase(columnElement.getName()));
                     }

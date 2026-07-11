@@ -28,7 +28,7 @@ public class SqlGenerator {
         StringBuilder columnList = new StringBuilder();
         for (int i = 0, size = columns.size(); i < size; i++) {
             if (i != 0) {
-                columnList.append(",");
+                columnList.append(", ");
             }
             columnList.append("?");
         }
@@ -41,9 +41,9 @@ public class SqlGenerator {
         for (int i = 0, size = columns.size(); i < size; i++) {
             DasColumn columnElement = columns.get(i);
             if (i != 0) {
-                setClause.append(",");
+                setClause.append(", ");
             }
-            setClause.append(" ").append(columnElement.getName()).append(" = ?");
+            setClause.append(columnElement.getName()).append(" = ?");
         }
         return setClause.toString();
     }
@@ -53,10 +53,10 @@ public class SqlGenerator {
         List<String> columnList = Lists.newArrayList();
         for (DasColumn column : columns) {
             if (!DasUtil.isIndexColumn(column)) {
-                columnList.add(" " + column.getName() + " = ?");
+                columnList.add(column.getName() + " = ?");
             }
         }
 
-        return Joiner.on(",").join(columnList);
+        return Joiner.on(", ").join(columnList);
     }
 }

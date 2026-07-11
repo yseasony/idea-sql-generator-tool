@@ -22,13 +22,12 @@ public final class Util {
             return "";
         }
         StringBuilder whereClause = new StringBuilder();
-        whereClause.append("WHERE");
+        whereClause.append("WHERE ");
         for (int i = 0, size = columns.size(); i < size; i++) {
-            whereClause.append(" ");
             if (i != 0) {
-                whereClause.append("AND ");
+                whereClause.append(" AND ");
             }
-            whereClause.append(columns.get(i)).append(" = ? ");
+            whereClause.append(columns.get(i)).append(" = ?");
         }
         return whereClause.toString();
     }
@@ -38,14 +37,13 @@ public final class Util {
             return "";
         }
         StringBuilder whereClause = new StringBuilder();
-        whereClause.append("WHERE");
+        whereClause.append("WHERE ");
         for (int i = 0, size = columns.size(); i < size; i++) {
-            whereClause.append(" ");
             if (i != 0) {
-                whereClause.append("AND ");
+                whereClause.append(" AND ");
             }
             whereClause.append(columns.get(i)).append(" = :")
-                    .append(convertCamelCase(columns.get(i))).append(" ");
+                    .append(convertCamelCase(columns.get(i)));
         }
         return whereClause.toString();
     }
