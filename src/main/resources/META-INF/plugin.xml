@@ -21,6 +21,10 @@
             <h1>idea Sql Generator plugin</h1><br/>
             <ul>
                  <li>
+                    Sql Generator v2.3.1<br/>
+                    - New option "Qualify table name with schema": generated SQL uses schema.table (Settings | Tools | SqlGenerator, off by default)
+                 </li>
+                 <li>
                     Sql Generator v2.3.0<br/>
                     - Compatible with new IDE versions (2024.2+ ~ 2026.x), fully passes JetBrains Marketplace verification<br/>
                     - Fix all deprecated and scheduled-for-removal API usages<br/>
